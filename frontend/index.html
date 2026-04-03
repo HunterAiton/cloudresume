@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunter Aiton | Cloud Security Engineer & SOC Analyst</title>
+    
+    <!-- SEO Metadata -->
+    <meta name="description" content="Professional portfolio of Hunter Aiton. Cloud Security Engineer specializing in Azure Sentinel, KQL, and Infrastructure-as-Code.">
+    <meta name="author" content="Hunter Aiton">
+
+    <!-- tsParticles Library for the Plexus Effect -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #060608;
+            --bg-card: rgba(24, 24, 27, 0.7);
+            --bg-hover: rgba(39, 39, 42, 0.85);
+            --text-primary: #f4f4f5;
+            --text-secondary: #a1a1aa;
+            --accent: #0078d4;
+            --accent-glow: rgba(0, 120, 212, 0.25);
+            --border: rgba(39, 39, 42, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        #tsparticles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: var(--bg-main);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header { margin-bottom: 3rem; }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(to right, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--border), transparent);
+            margin-left: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .summary {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+        }
+
+        section { margin-bottom: 4.5rem; }
+
+        .card {
+            display: block;
+            text-decoration: none;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            margin-bottom: 1.25rem;
+            color: inherit;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title { font-size: 1.15rem; font-weight: 600; color: #fff; }
+
+        .item-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .item-company {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        ul.duties { 
+            list-style-type: disc; 
+            margin-left: 1.25rem;
+        }
+        ul.duties li {
+            margin-bottom: 0.6rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-left: 0.25rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-cat h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .tags-container { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .visitor-counter-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .visitor-counter {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--accent-glow);
+            border-radius: 20px;
+            background: rgba(0, 120, 212, 0.05);
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-bottom: 4rem;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            #tsparticles, .visitor-counter { display: none; }
+            .card { border: 1px solid #ddd; background: none; break-inside: avoid; }
+            .container { padding: 1rem; max-width: 100%; }
+            h1 { -webkit-text-fill-color: black; }
+            .tag { border: 1px solid #ddd; color: black; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .item-header { flex-direction: column; gap: 0.25rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="tsparticles"></div>
+
+    <div class="container">
+        <header>
+            <h1>Hunter Aiton</h1>
+            <p class="subtitle">Cloud Security Engineer | Security Operations Analyst</p>
+            <p class="summary">
+                Specializing in Azure-native security architecture, SIEM engineering (Microsoft Sentinel), and detection automation. 
+                Focused on optimizing incident response for enterprise environments through KQL-driven telemetry analysis and 
+                Infrastructure-as-Code (Terraform) deployments.
+            </p>
+            <div class="contact-links">
+                <a href="tel:2562971463">(256) 297-1463</a>
+                <a href="mailto:hunter.aiton0524@gmail.com">hunter.aiton0524@gmail.com</a>
+                <a href="https://linkedin.com/in/hunter-aiton/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/HunterAiton" target="_blank">GitHub</a>
+            </div>
+        </header>
+
+        <main>
+            <!-- 1. Technical Skills -->
+            <section>
+                <h2>Technical Skillset</h2>
+                <div class="skills-grid">
+                    <div class="skill-cat">
+                        <h4>Cloud & Platforms</h4>
+                        <div class="tags-container">
+                            <span class="tag">Azure (Sentinel/Log Analytics)</span>
+                            <span class="tag">Microsoft 365 Security</span>
+                            <span class="tag">Entra ID (Azure AD)</span>
+                            <span class="tag">Azure Key Vault</span>
+                        </div>
+                    </div>
+                    <div class="skill-cat">
+                        <h4>Security Ops</h4>
+                        <div class="tags-container">
+                            <span class="tag">SIEM/SOAR</span>
+                            <span class="tag">EDR/XDR (Defender)</span>
+                            <span class="tag">Detection Engineering</span>
+                            <span class="tag">Threat Hunting</span>
+                        </div>
+                    </div>
+                    <div class="skill-cat">
+                        <h4>DevOps & Code</h4>
+                        <div class="tags-container">
+                            <span class="tag">Terraform (IaC)</span>
+                            <span class="tag">GitHub Actions (CI/CD)</span>
+                            <span class="tag">KQL</span>
+                            <span class="tag">PowerShell/Bash</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Experience -->
+            <section>
+                <h2>Professional Experience</h2>
+                
+                <div class="card" style="cursor: default;">
+                    <div class="item-header">
+                        <span class="item-title">Security Operations Analyst</span>
+                        <span class="item-date">May 2024 — Jul 2025</span>
+                    </div>
+                    <span class="item-company">Patriot Consulting Technology</span>
+                    <ul class="duties">
+                        <li>Engineered custom KQL detection logic in <strong>Microsoft Sentinel</strong>, reducing false positive alerts by 30% and significantly decreasing Mean Time to Detect (MTTD).</li>
+                        <li>Automated threat hunting workflows via customized dashboards, integrating telemetry from Defender for Endpoint and Firewall logs for unified visibility.</li>
+                        <li>Reduced alert fatigue by optimizing incident response playbooks and communicating mitigation strategies to enterprise stakeholders.</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="cursor: default;">
+                    <div class="item-header">
+                        <span class="item-title">Security Solutions Engineer</span>
+                        <span class="item-date">Apr 2024 — Sep 2024</span>
+                    </div>
+                    <span class="item-company">Vijilan Security</span>
+                    <ul class="duties">
+                        <li>Onboarded and managed secure logging pipelines for 200+ enterprise environments using Cloud Connectors and API integrations.</li>
+                        <li>Maintained 99.9% uptime for data ingestion pipelines across diverse client environments through automated health monitoring.</li>
+                        <li>Developed standardized detection rule sets across global tenants, ensuring consistent security posture and regulatory compliance.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. Engineering Labs -->
+            <section>
+                <h2>Engineering Projects</h2>
+                <a href="https://github.com/HunterAiton" target="_blank" class="card">
+                    <div class="item-header">
+                        <span class="item-title">Cloud-Native Honeynet & SOC</span>
+                    </div>
+                    <span class="item-company">Azure Sentinel / KQL / Log Analytics</span>
+                    <ul class="duties">
+                        <li><strong>Scope:</strong> Implemented a live honeynet to capture global brute-force telemetry.</li>
+                        <li><strong>Tech:</strong> Sentinel SIEM, Log Analytics, Azure Storage, KQL.</li>
+                        <li><strong>Outcome:</strong> Automated geo-mapping of malicious IP traffic and identified emerging attack trends for threat intelligence reporting.</li>
+                    </ul>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent); margin-top: 1rem; display: block;">Architecture Documentation ↗</span>
+                </a>
+
+                <a href="https://github.com/HunterAiton" target="_blank" class="card">
+                    <div class="item-header">
+                        <span class="item-title">Infrastructure-as-Code Resume</span>
+                    </div>
+                    <span class="item-company">Terraform / GitHub Actions / Azure Blob</span>
+                    <ul class="duties">
+                        <li><strong>Scope:</strong> Automated provisioning and deployment of a global static web application.</li>
+                        <li><strong>Tech:</strong> Terraform, GitHub Actions, Azure CDN.</li>
+                        <li><strong>Outcome:</strong> Achieved zero-touch deployment via CI/CD, demonstrating mastery of cloud operations and automation.</li>
+                    </ul>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent); margin-top: 1rem; display: block;">Source Code ↗</span>
+                </a>
+
+                <a href="https://tryhackme.com/p/hunter.aiton0524" target="_blank" class="card" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="item-title">TryHackMe Profile <span class="badge">Top 6% Globally</span></span>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent);">View Ranking ↗</span>
+                </a>
+            </section>
+
+            <!-- 4. Education & Credentials -->
+            <section>
+                <h2>Education & Certifications</h2>
+                <div class="card" style="cursor: default;">
+                    <div class="item-header">
+                        <span class="item-title">Western Governors University</span>
+                        <span class="item-date">Exp. 2026</span>
+                    </div>
+                    <span class="item-company">B.S. Cybersecurity and Information Assurance</span>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                        Currently pursuing degree with a career trajectory targeting an M.S. in Cybersecurity and an MBA to align technical expertise with strategic leadership.
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="font-size: 0.8rem; margin-bottom: 1rem; color: var(--text-secondary); text-transform: uppercase;">Active Credentials</h3>
+                    <div class="tags-container" style="margin-bottom: 2rem;">
+                        <span class="tag">CompTIA Security+</span>
+                        <span class="tag">CompTIA Network+</span>
+                        <span class="tag">CompTIA A+</span>
+                        <span class="tag">ITIL V4</span>
+                    </div>
+
+                    <h3 style="font-size: 0.75rem; margin-bottom: 1rem; color: var(--accent); text-transform: uppercase; opacity: 0.8;">Planned / In-Progress (2026)</h3>
+                    <div class="tags-container">
+                        <span class="tag" style="border-style: dashed; border-color: var(--accent);">CompTIA PenTest+</span>
+                        <span class="tag" style="border-style: dashed; border-color: var(--accent);">CompTIA Data+</span>
+                        <span class="tag" style="border-style: dashed; border-color: var(--accent);">LPI Linux Essentials</span>
+                        <span class="tag" style="border-style: dashed; border-color: var(--accent);">Azure Administrator (AZ-104)</span>
+                        <span class="tag" style="border-style: dashed; border-color: var(--accent);">Azure Security (AZ-500)</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="visitor-counter-wrapper">
+            <div class="visitor-counter">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                Unique Profile Views: <span id="count">---</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>Cloud Resume Challenge &copy; 2026 Hunter Aiton</p>
+            <p style="margin-top: 0.4rem; font-size: 0.65rem;">Stack: Terraform | GitHub Actions | Azure Blob | tsParticles</p>
+        </footer>
+    </div>
+
+    <script>
+        // tsParticles Configuration
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 1000 } },
+                color: { value: "#0078d4" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: false },
+                size: { value: 1.2, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 180,
+                    color: "#0078d4",
+                    opacity: 0.1,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 0.6,
+                    direction: "none",
+                    out_mode: "out",
+                }
+            },
+            interactivity: {
+                events: {
+                    onhover: { 
+                        enable: true, 
+                        mode: ["grab", "bubble"] 
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: { 
+                        distance: 200, 
+                        line_linked: { 
+                            opacity: 0.4,
+                            color: "#22c55e" // Connection lines turn green
+                        } 
+                    },
+                    bubble: {
+                        distance: 200,
+                        size: 1.2, // Match the original particle size
+                        duration: 2,
+                        opacity: 0.8,
+                        color: "#22c55e" // Particles turn green
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Visitor Counter Logic
+        async function updateCounter() {
+            try {
+                // Placeholder - update with your actual Azure Function URL
+                document.getElementById('count').innerText = "1,337";
+            } catch (err) {
+                console.error('Failed to fetch visitor count');
+                document.getElementById('count').innerText = "Unavailable";
+            }
+        }
+        updateCounter();
+    </script>
+</body>
+</html>
