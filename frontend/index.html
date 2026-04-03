@@ -482,17 +482,7 @@
             retina_detect: true
         });
 
-        // Visitor Counter Logic
-        async function updateCounter() {
-            try {
-                // Placeholder - update with your actual Azure Function URL
-                document.getElementById('count').innerText = "1,337";
-            } catch (err) {
-                console.error('Failed to fetch visitor count');
-                document.getElementById('count').innerText = "Unavailable";
-            }
-        }
-        updateCounter();
-    </script>
+        </script>
+        <script src="./azure-api.js"></script>
 </body>
 </html>
