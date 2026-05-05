@@ -27,7 +27,6 @@
             --accent: #0078d4;
             --accent-glow: rgba(0, 120, 212, 0.25);
             --border: rgba(39, 39, 42, 0.8);
-            --success: #22c55e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -216,87 +215,6 @@
             text-transform: uppercase;
         }
 
-        /* Observability UI Elements */
-        .obs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .metric-card {
-            padding: 1.25rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-        }
-
-        .metric-label {
-            display: block;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .metric-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #fff;
-            display: block;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .metric-sub {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            margin-top: 0.4rem;
-            display: block;
-        }
-
-        .obs-detail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-
-        .detail-card {
-            padding: 1.25rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-        }
-
-        .detail-card h3 {
-            font-size: 0.8rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .status-list { list-style: none; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
-        .status-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
-        }
-        .status-list li:last-child { border-bottom: none; }
-
-        .status-dot {
-            height: 8px;
-            width: 8px;
-            background-color: var(--success);
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            box-shadow: 0 0 8px var(--success);
-        }
-
         .visitor-counter-wrapper {
             display: flex;
             justify-content: center;
@@ -328,7 +246,7 @@
 
         @media print {
             body { background: white; color: black; }
-            #tsparticles, .visitor-counter, #cloud-observability { display: none; }
+            #tsparticles, .visitor-counter { display: none; }
             .card { border: 1px solid #ddd; background: none; break-inside: avoid; }
             .container { padding: 1rem; max-width: 100%; }
             h1 { -webkit-text-fill-color: black; }
@@ -339,7 +257,6 @@
             h1 { font-size: 2.2rem; }
             .item-header { flex-direction: column; gap: 0.25rem; }
             .skills-grid { grid-template-columns: 1fr; }
-            .obs-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -365,9 +282,9 @@
         </header>
 
         <main>
-            <!-- 1. Education & Academic Path -->
+            <!-- 1. Education & Credentials -->
             <section>
-                <h2>Education & Academic Path</h2>
+                <h2>Education & Certifications</h2>
                 <div class="card" style="cursor: default;">
                     <div class="item-header">
                         <span class="item-title">Western Governors University</span>
@@ -375,8 +292,7 @@
                     </div>
                     <span class="item-company">B.S. Cybersecurity and Information Assurance</span>
                     <p style="font-size: 0.85rem; color: var(--text-secondary);">
-                        Program aligned to NSA/NICE frameworks. Extensive coursework in cloud security, SOC operations, and digital forensics.
-                    </p>
+                        Currently pursuing degree B.S. Cybersecurity & Information Assurance, Western Governors University – hands-on program aligned to NSA/NICE frameworks with coursework in cloud security, SOC operations, and digital forensics.                    </p>
                 </div>
 
                 <div style="margin-top: 2rem;">
@@ -387,29 +303,28 @@
                         <span class="tag">CompTIA A+</span>
                         <span class="tag">ITIL V4</span>
                         <span class="tag">LPI Linux Essentials</span>
-                        <span class="tag">TEFL Certification</span>
                     </div>
 
-                    <h3 style="font-size: 0.75rem; margin-bottom: 1rem; color: var(--accent); text-transform: uppercase; opacity: 0.8;">Roadmap for 2026</h3>
+                    <h3 style="font-size: 0.75rem; margin-bottom: 1rem; color: var(--accent); text-transform: uppercase; opacity: 0.8;">Planned / In-Progress (2026)</h3>
                     <div class="tags-container">
                         <span class="tag" style="border-style: dashed; border-color: var(--accent);">CompTIA PenTest+</span>
                         <span class="tag" style="border-style: dashed; border-color: var(--accent);">CompTIA Data+</span>
                         <span class="tag" style="border-style: dashed; border-color: var(--accent);">Azure Administrator (AZ-104)</span>
-                        <span class="tag" style="border-style: dashed; border-color: var(--accent);">Azure Security Engineer (AZ-500)</span>
+                        <span class="tag" style="border-style: dashed; border-color: var(--accent);">Azure Security (AZ-500)</span>
                     </div>
                 </div>
             </section>
 
-            <!-- 2. Technical Skillset -->
+            <!-- 2. Technical Skills -->
             <section>
                 <h2>Technical Skillset</h2>
                 <div class="skills-grid">
                     <div class="skill-cat">
-                        <h4>Cloud & Identity</h4>
+                        <h4>Cloud & Platforms</h4>
                         <div class="tags-container">
-                            <span class="tag">Azure (Sentinel/Logs)</span>
-                            <span class="tag">Microsoft 365 Defender</span>
-                            <span class="tag">Entra ID</span>
+                            <span class="tag">Azure (Sentinel/Log Analytics)</span>
+                            <span class="tag">Microsoft 365 Security</span>
+                            <span class="tag">Entra ID (Azure AD)</span>
                             <span class="tag">Azure Key Vault</span>
                         </div>
                     </div>
@@ -417,24 +332,24 @@
                         <h4>Security Ops</h4>
                         <div class="tags-container">
                             <span class="tag">SIEM/SOAR</span>
-                            <span class="tag">EDR/XDR Engineering</span>
-                            <span class="tag">Detection Logic (KQL)</span>
-                            <span class="tag">Incident Response</span>
+                            <span class="tag">EDR/XDR (Defender)</span>
+                            <span class="tag">Detection Engineering</span>
+                            <span class="tag">Threat Hunting</span>
                         </div>
                     </div>
                     <div class="skill-cat">
-                        <h4>DevOps & IaC</h4>
+                        <h4>DevOps & Code</h4>
                         <div class="tags-container">
-                            <span class="tag">Terraform</span>
-                            <span class="tag">GitHub Actions</span>
-                            <span class="tag">PowerShell / Bash</span>
-                            <span class="tag">Python</span>
+                            <span class="tag">Terraform (IaC)</span>
+                            <span class="tag">GitHub Actions (CI/CD)</span>
+                            <span class="tag">KQL</span>
+                            <span class="tag">PowerShell/Bash</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 3. Professional Experience -->
+            <!-- 3. Experience -->
             <section>
                 <h2>Professional Experience</h2>
                 
@@ -445,9 +360,9 @@
                     </div>
                     <span class="item-company">Patriot Consulting Technology</span>
                     <ul class="duties">
-                        <li>Engineered custom KQL detection logic in <strong>Microsoft Sentinel</strong>, reducing false positive alerts by 30%.</li>
-                        <li>Automated threat hunting workflows via customized dashboards, integrating telemetry from Defender and Firewall logs.</li>
-                        <li>Reduced alert fatigue by optimizing incident response playbooks for enterprise stakeholders.</li>
+                        <li>Engineered custom KQL detection logic in <strong>Microsoft Sentinel</strong>, reducing false positive alerts by 30% and significantly decreasing Mean Time to Detect (MTTD).</li>
+                        <li>Automated threat hunting workflows via customized dashboards, integrating telemetry from Defender for Endpoint and Firewall logs for unified visibility.</li>
+                        <li>Reduced alert fatigue by optimizing incident response playbooks and communicating mitigation strategies to enterprise stakeholders.</li>
                     </ul>
                 </div>
 
@@ -458,9 +373,9 @@
                     </div>
                     <span class="item-company">Vijilan Security</span>
                     <ul class="duties">
-                        <li>Onboarded and managed secure logging pipelines for 200+ enterprise environments using Cloud Connectors.</li>
-                        <li>Maintained 99.9% uptime for data ingestion pipelines through automated health monitoring.</li>
-                        <li>Developed standardized detection rule sets across global tenants, ensuring consistent security posture.</li>
+                        <li>Onboarded and managed secure logging pipelines for 200+ enterprise environments using Cloud Connectors and API integrations.</li>
+                        <li>Maintained 99.9% uptime for data ingestion pipelines across diverse client environments through automated health monitoring.</li>
+                        <li>Developed standardized detection rule sets across global tenants, ensuring consistent security posture and regulatory compliance.</li>
                     </ul>
                 </div>
             </section>
@@ -475,8 +390,10 @@
                     <span class="item-company">Azure Sentinel / KQL / Log Analytics</span>
                     <ul class="duties">
                         <li><strong>Scope:</strong> Implemented a live honeynet to capture global brute-force telemetry.</li>
-                        <li><strong>Outcome:</strong> Automated geo-mapping of malicious IP traffic via custom Sentinel Workbooks.</li>
+                        <li><strong>Tech:</strong> Sentinel SIEM, Log Analytics, Azure Storage, KQL.</li>
+                        <li><strong>Outcome:</strong> Automated geo-mapping of malicious IP traffic and identified emerging attack trends for threat intelligence reporting.</li>
                     </ul>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent); margin-top: 1rem; display: block;">Architecture Documentation ↗</span>
                 </a>
 
                 <a href="https://github.com/HunterAiton" target="_blank" class="card">
@@ -485,63 +402,17 @@
                     </div>
                     <span class="item-company">Terraform / GitHub Actions / Azure Blob</span>
                     <ul class="duties">
-                        <li><strong>Scope:</strong> Automated provisioning and deployment of this static web application.</li>
-                        <li><strong>Outcome:</strong> Zero-touch CI/CD pipeline demonstrating cloud automation mastery.</li>
+                        <li><strong>Scope:</strong> Automated provisioning and deployment of a global static web application.</li>
+                        <li><strong>Tech:</strong> Terraform, GitHub Actions, Azure CDN.</li>
+                        <li><strong>Outcome:</strong> Achieved zero-touch deployment via CI/CD, demonstrating mastery of cloud operations and automation.</li>
                     </ul>
+                    <span style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent); margin-top: 1rem; display: block;">Source Code ↗</span>
                 </a>
 
                 <a href="https://tryhackme.com/p/hunter.aiton0524" target="_blank" class="card" style="display: flex; justify-content: space-between; align-items: center;">
                     <span class="item-title">TryHackMe Profile <span class="badge">Top 6% Globally</span></span>
                     <span style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--accent);">View Ranking ↗</span>
                 </a>
-            </section>
-
-            <!-- 5. Cloud Observability (The 2026 Addition) -->
-            <section id="cloud-observability">
-                <h2>Cloud Observability & Telemetry</h2>
-                <div class="obs-grid">
-                    <article class="metric-card">
-                        <span class="metric-label">Total Views</span>
-                        <strong class="metric-value" id="obs-totalViews">---</strong>
-                        <small class="metric-sub">Azure Table Storage</small>
-                    </article>
-                    <article class="metric-card">
-                        <span class="metric-label">API Health</span>
-                        <strong class="metric-value" style="color: var(--success);" id="obs-apiStatus">99.9%</strong>
-                        <small class="metric-sub">Func Success Rate</small>
-                    </article>
-                    <article class="metric-card">
-                        <span class="metric-label">Avg Latency</span>
-                        <strong class="metric-value" id="obs-latency">34ms</strong>
-                        <small class="metric-sub">CDN Performance</small>
-                    </article>
-                    <article class="metric-card">
-                        <span class="metric-label">Top Region</span>
-                        <strong class="metric-value" id="obs-region">US-East</strong>
-                        <small class="metric-sub">Active Traffic</small>
-                    </article>
-                </div>
-
-                <div class="obs-detail-grid">
-                    <div class="detail-card">
-                        <h3>Infrastructure Status</h3>
-                        <ul class="status-list">
-                            <li><span><span class="status-dot"></span>Azure Blob (Origin)</span> <span style="color: var(--success);">Online</span></li>
-                            <li><span><span class="status-dot"></span>Front Door / CDN</span> <span style="color: var(--success);">Healthy</span></li>
-                            <li><span><span class="status-dot"></span>CI/CD (GitHub)</span> <span style="color: var(--success);">Passed</span></li>
-                            <li><span><span class="status-dot"></span>Persistence DB</span> <span style="color: var(--success);">Active</span></li>
-                        </ul>
-                    </div>
-                    <div class="detail-card">
-                        <h3>Traffic Insights (30d)</h3>
-                        <ul class="status-list" id="obs-trafficList">
-                            <li><span>United States</span> <span>82%</span></li>
-                            <li><span>Canada</span> <span>9%</span></li>
-                            <li><span>United Kingdom</span> <span>5%</span></li>
-                            <li><span>Other</span> <span>4%</span></li>
-                        </ul>
-                    </div>
-                </div>
             </section>
         </main>
 
@@ -554,12 +425,12 @@
 
         <footer>
             <p>Cloud Resume Challenge &copy; 2026 Hunter Aiton</p>
-            <p style="margin-top: 0.4rem; font-size: 0.65rem;">Stack: Terraform | GitHub Actions | Azure Functions | Azure Monitor</p>
+            <p style="margin-top: 0.4rem; font-size: 0.65rem;">Stack: Terraform | GitHub Actions | Azure Blob | tsParticles</p>
         </footer>
     </div>
 
     <script>
-        // Plexus Effect Configuration
+        // tsParticles Configuration
         tsParticles.load("tsparticles", {
             fpsLimit: 60,
             particles: {
@@ -575,46 +446,42 @@
                     opacity: 0.1,
                     width: 1
                 },
-                move: { enable: true, speed: 0.6, direction: "none", out_mode: "out" }
+                move: {
+                    enable: true,
+                    speed: 0.6,
+                    direction: "none",
+                    out_mode: "out",
+                }
             },
             interactivity: {
                 events: {
-                    onhover: { enable: true, mode: ["grab", "bubble"] },
+                    onhover: { 
+                        enable: true, 
+                        mode: ["grab", "bubble"] 
+                    },
                     resize: true
                 },
                 modes: {
-                    grab: { distance: 200, line_linked: { opacity: 0.4, color: "#22c55e" } },
-                    bubble: { distance: 200, size: 1.2, duration: 2, opacity: 0.8, color: "#22c55e" }
+                    grab: { 
+                        distance: 200, 
+                        line_linked: { 
+                            opacity: 0.4,
+                            color: "#22c55e" // Connection lines turn green
+                        } 
+                    },
+                    bubble: {
+                        distance: 200,
+                        size: 1.2, // Match the original particle size
+                        duration: 2,
+                        opacity: 0.8,
+                        color: "#22c55e" // Particles turn green
+                    }
                 }
             },
             retina_detect: true
         });
 
-        // Telemetry Update Logic
-        async function fetchObservability() {
-            try {
-                // [Inference] This will be populated by your azure-api.js logic
-                // For now, we use placeholders until backend objects are connected
-                const data = {
-                    totalViews: "1,428",
-                    apiStatus: "99.98%",
-                    latency: "34ms",
-                    topRegion: "US-East"
-                };
-
-                document.getElementById('obs-totalViews').textContent = data.totalViews;
-                document.getElementById('count').textContent = data.totalViews;
-                document.getElementById('obs-apiStatus').textContent = data.apiStatus;
-                document.getElementById('obs-latency').textContent = data.latency;
-                document.getElementById('obs-region').textContent = data.topRegion;
-
-            } catch (err) {
-                console.warn("Telemetry fetch failed.", err);
-            }
-        }
-
-        window.onload = fetchObservability;
-    </script>
-    <script src="./azure-api.js"></script>
+        </script>
+        <script src="./azure-api.js"></script>
 </body>
 </html>
