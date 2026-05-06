@@ -10,6 +10,8 @@ from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 WORKSPACE_ID = os.environ.get("LOG_ANALYTICS_WORKSPACE_ID")
 TABLE_NAME = os.environ.get("APP_REQUESTS_TABLE", "AppRequests")
 
+# NOTE: KQL requires two separate 'extend' statements when the second
+# extend references a column created in the first extend.
 QUERY = """
 let timeframe = 30d;
 AppRequests
@@ -18,9 +20,8 @@ AppRequests
     totalViews = count(),
     successful = countif(Success == true),
     avgLatencyMs = round(avg(DurationMs), 2)
-| extend
-    successRate = iff(totalViews == 0, 0.0, round((todouble(successful) / todouble(totalViews)) * 100.0, 2)),
-    apiHealth = iff(successRate >= 99.0, 'Healthy', iff(successRate >= 95.0, 'Degraded', 'Unhealthy'))
+| extend successRate = iff(totalViews == 0, 0.0, round((todouble(successful) / todouble(totalViews)) * 100.0, 2))
+| extend apiHealth = iff(successRate >= 99.0, 'Healthy', iff(successRate >= 95.0, 'Degraded', 'Unhealthy'))
 | project totalViews, successRate, avgLatencyMs, apiHealth
 """
 
@@ -55,7 +56,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             )
 
         logging.info(f"WORKSPACE_ID = {WORKSPACE_ID}")
-        logging.info(f"TABLE_NAME = {TABLE_NAME}")
 
         credential = _get_credential()
         client = LogsQueryClient(credential)
@@ -68,11 +68,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         )
 
         logging.info(f"Query status = {result.status}")
-        if result.tables:
-            logging.info(f"Tables returned = {len(result.tables)}")
-            logging.info(f"Rows in first table = {len(result.tables[0].rows)}")
-        else:
-            logging.warning("No tables in result")
 
         if result.status != LogsQueryStatus.SUCCESS or not result.tables or not result.tables[0].rows:
             logging.warning(f"Query did not return usable results. Status={result.status}")
