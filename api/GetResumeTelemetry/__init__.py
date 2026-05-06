@@ -10,9 +10,9 @@ from azure.monitor.query import LogsQueryClient, LogsQueryStatus
 WORKSPACE_ID = os.environ.get("LOG_ANALYTICS_WORKSPACE_ID")
 TABLE_NAME = os.environ.get("APP_REQUESTS_TABLE", "AppRequests")
 
-QUERY = f"""
+QUERY = """
 let timeframe = 30d;
-{TABLE_NAME}
+AppRequests
 | where TimeGenerated >= ago(timeframe)
 | summarize
     totalViews = count(),
@@ -20,7 +20,7 @@ let timeframe = 30d;
     avgLatencyMs = round(avg(DurationMs), 2)
 | extend
     successRate = iff(totalViews == 0, 0.0, round((todouble(successful) / todouble(totalViews)) * 100.0, 2)),
-    apiHealth = iff(successRate >= 99.0, "Healthy", iff(successRate >= 95.0, "Degraded", "Unhealthy"))
+    apiHealth = iff(successRate >= 99.0, 'Healthy', iff(successRate >= 95.0, 'Degraded', 'Unhealthy'))
 | project totalViews, successRate, avgLatencyMs, apiHealth
 """
 
@@ -34,12 +34,16 @@ FALLBACK = {
 
 def _get_credential():
     try:
-        return ManagedIdentityCredential()
-    except Exception:
+        cred = ManagedIdentityCredential()
+        logging.info("Using ManagedIdentityCredential")
+        return cred
+    except Exception as e:
+        logging.warning(f"ManagedIdentityCredential failed: {e}, falling back to DefaultAzureCredential")
         return DefaultAzureCredential()
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("GetResumeTelemetry function invoked")
     try:
         if not WORKSPACE_ID:
             logging.error("LOG_ANALYTICS_WORKSPACE_ID is not set")
@@ -50,15 +54,28 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 headers={"Access-Control-Allow-Origin": "*"}
             )
 
-        client = LogsQueryClient(_get_credential())
+        logging.info(f"WORKSPACE_ID = {WORKSPACE_ID}")
+        logging.info(f"TABLE_NAME = {TABLE_NAME}")
+
+        credential = _get_credential()
+        client = LogsQueryClient(credential)
+
+        logging.info("Executing Log Analytics query...")
         result = client.query_workspace(
             workspace_id=WORKSPACE_ID,
-            query=QUERY.replace(f"{TABLE_NAME}", TABLE_NAME),
+            query=QUERY,
             timespan=timedelta(days=30)
         )
 
+        logging.info(f"Query status = {result.status}")
+        if result.tables:
+            logging.info(f"Tables returned = {len(result.tables)}")
+            logging.info(f"Rows in first table = {len(result.tables[0].rows)}")
+        else:
+            logging.warning("No tables in result")
+
         if result.status != LogsQueryStatus.SUCCESS or not result.tables or not result.tables[0].rows:
-            logging.warning("Query returned no results; using fallback")
+            logging.warning(f"Query did not return usable results. Status={result.status}")
             return func.HttpResponse(
                 json.dumps(FALLBACK),
                 mimetype="application/json",
@@ -67,12 +84,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             )
 
         row = result.tables[0].rows[0]
+        logging.info(f"Raw row = {list(row)}")
         payload = {
             "totalViews": int(row[0] or 0),
             "successRate": float(row[1] or 0.0),
             "avgLatencyMs": float(row[2] or 0.0),
             "apiHealth": str(row[3] or "Unknown")
         }
+        logging.info(f"Returning payload = {payload}")
 
         return func.HttpResponse(
             json.dumps(payload),
@@ -82,7 +101,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as exc:
-        logging.exception("Telemetry query failed")
+        logging.exception(f"Telemetry query failed with exception: {str(exc)}")
         return func.HttpResponse(
             json.dumps(FALLBACK),
             mimetype="application/json",
