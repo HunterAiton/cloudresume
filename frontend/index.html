@@ -593,7 +593,7 @@
         // Telemetry Update Logic
         async function fetchObservability() {
             try {
-                const response = await fetch('/api/GetResumeTelemetry', {
+                                const response = await fetch('https://resume-telemetry-fn-dwhdbhc7egceawaf.eastus-01.azurewebsites.net/api/GetResumeTelemetry', {
                     method: 'GET',
                     headers: { 'Accept': 'application/json' }
                 });
