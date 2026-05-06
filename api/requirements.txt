@@ -2,3 +2,5 @@ azure-functions
 azure-identity
 azure-monitor-query
 azure-cosmos
+cffi
+cryptography
