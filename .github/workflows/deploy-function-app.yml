@@ -15,16 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          cd api
-          pip install -r requirements.txt --target='.python_packages/lib/site-packages'
-
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
@@ -32,4 +22,4 @@ jobs:
           package: api
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           sku: flexconsumption
-          remote-build: false
+          remote-build: true
