@@ -2,6 +2,8 @@
 
 This repository contains an Azure-based Cloud Resume Challenge project built to show practical cloud engineering, secure design decisions, and end-to-end ownership. The goal was not just to publish a resume site, but to build a portfolio project that demonstrates how frontend delivery, serverless backend logic, telemetry, CI/CD, and security controls fit together in a real Azure environment.
 
+**Live site:** [www.hunteraiton.dev](https://www.hunteraiton.dev)
+
 ## Why this project exists
 
 This project was built as a hands-on way to move beyond theory and turn Azure knowledge into something public, useful, and interview-ready. Instead of saying “I studied Azure Functions” or “I understand CI/CD,” this repository shows those skills through a live site, automated deployments, backend integrations, troubleshooting, and security-focused design choices.
@@ -29,6 +31,27 @@ At this stage, the project includes the following major components:
 
 ## Architecture overview
 
+![Architecture diagram](./architecture-diagram.svg)
+
+```mermaid
+flowchart LR
+    U[User Browser]
+    D[www.hunteraiton.dev<br/>Custom Domain + HTTPS]
+    F[Azure Static Web App]
+    A[Azure Function App]
+    AI[Application Insights]
+    LA[Log Analytics]
+    GH[GitHub Actions]
+    R[GitHub Repository]
+
+    U --> D --> F
+    F --> A
+    A --> AI
+    AI --> LA
+    R --> GH --> F
+    R --> GH --> A
+```
+
 The project is built around a simple but realistic cloud pattern:
 
 - **Frontend:** Static resume site hosted in Azure.
@@ -47,11 +70,11 @@ This is not just a frontend project. It includes cloud hosting, deployment workf
 
 ### 2. Azure service integration
 
-The project brings together multiple Azure services rather than treating Azure as a place to host static files. It uses Azure as an application platform, not just storage.
+The project brings together multiple Azure services rather than treating Azure as a mere hosting service for static files. It uses Azure as an application platform, not just storage.
 
 ### 3. CI/CD in practice
 
-The repository includes GitHub Actions workflows to automate deployments. That means changes are pushed through repeatable deployment steps instead of being handled manually. For employers, that signals familiarity with DevOps workflows, release discipline, and operational repeatability.
+The repository includes GitHub Actions workflows to automate deployments. That means changes are pushed through repeatable deployment steps rather than handled manually. For employers, that signals familiarity with DevOps workflows, release discipline, and operational repeatability.
 
 ### 4. Troubleshooting and iteration
 
@@ -67,7 +90,7 @@ That change matters because it shows a security mindset: not just making somethi
 
 The project started as a standard Azure-based Cloud Resume Challenge build: publish a resume site, connect it to cloud services, and automate deployment. From there, it evolved into something more useful for a cloud security portfolio.
 
-Instead of stopping at a static site and a basic visitor counter, the project expanded into observability and secure backend design. A lightweight telemetry feature was added to surface operational data such as total views, success rate, and average latency. During that work, the design had to be corrected to avoid exposing sensitive access patterns in browser-visible code.
+Instead of stopping at a static site and a basic visitor counter, the project expanded into observability and secure backend design. A lightweight telemetry feature was added to surface operational data, including total views, success rate, and average latency. During that work, the design had to be corrected to avoid exposing sensitive access patterns in browser-visible code.
 
 That led to a more security-aware architecture:
 
@@ -91,7 +114,7 @@ The following milestones have already been worked through in this repository:
 - Observability feature added to the site concept and integrated into the frontend.
 - Backend telemetry function revised to avoid exposing function keys in browser code.
 - Application Insights / Log Analytics query behavior investigated to support aggregate telemetry.
-- Multiple deployment and query issues debugged through real workflow runs and environment changes.
+- Multiple deployment and query issues were debugged through real workflow runs and environment changes.
 
 ## Security decisions made
 
@@ -112,21 +135,6 @@ A few lessons have already come out of the build process:
 - Azure monitoring data models and table names can vary based on resource configuration, so telemetry queries must be validated against the actual environment.
 - Good cloud projects are not just about service selection. They are also about identity, access, observability, and secure defaults.
 - Troubleshooting is part of the signal. Employers often care just as much about how issues were diagnosed and corrected as they do about the final architecture.
-
-## Current focus
-
-Current work is focused on improving the backend telemetry path and continuing to harden the project. That includes validating log queries, confirming least-privilege access, improving frontend/backend alignment, and making the final public implementation both functional and safe to expose.
-
-## Next improvements
-
-Planned next steps include:
-
-- Finalizing the telemetry endpoint so live aggregate metrics return correctly.
-- Tightening Azure RBAC for the Function App managed identity.
-- Adding stronger static site security headers.
-- Improving repository documentation around architecture and security controls.
-- Expanding infrastructure-as-code coverage.
-- Continuing to shape the project as a stronger cloud security portfolio piece.
 
 ## Why this matters for cloud security roles
 
