@@ -1,122 +1,152 @@
 # Cloud Resume Challenge on Azure
 
-This project is a hands-on Azure implementation of the Cloud Resume Challenge. The goal is to build and publish a personal resume website while learning how real cloud services fit together in a practical, end-to-end project.
+This repository contains an Azure-based Cloud Resume Challenge project built to show practical cloud engineering, secure design decisions, and end-to-end ownership. The goal was not just to publish a resume site, but to build a portfolio project that demonstrates how frontend delivery, serverless backend logic, telemetry, CI/CD, and security controls fit together in a real Azure environment.
 
-## Project Goal
+**Live site:** [www.hunteraiton.dev](https://www.hunteraiton.dev)
 
-The main objective is to host a professional resume in Azure and use the project as a real portfolio piece. Instead of only studying cloud theory, this project focuses on building something that demonstrates skills in cloud infrastructure, security, automation, and deployment.
+## Why this project exists
 
-## What This Project Is Meant To Show
+This project was built as a hands-on way to move beyond theory and turn Azure knowledge into something public, useful, and interview-ready. Instead of saying “I studied Azure Functions” or “I understand CI/CD,” this repository shows those skills through a live site, automated deployments, backend integrations, troubleshooting, and security-focused design choices.
 
-This project is designed to prove the ability to:
+For employers, this project is meant to show the ability to:
 
-- Build and host a static website in Azure.
-- Use Azure services in a way that reflects real-world cloud architecture.
-- Connect a frontend site to backend services.
-- Track and automate infrastructure changes.
-- Apply security and operational best practices.
-- Create a portfolio project that supports a move into cloud or cloud security roles.
+- Design and publish a cloud-hosted web application in Azure.
+- Connect a static frontend to a serverless backend.
+- Build and troubleshoot CI/CD workflows in GitHub Actions.
+- Work with Azure monitoring and telemetry.
+- Make better security decisions as requirements evolve.
+- Document architecture, tradeoffs, and lessons learned clearly.
 
-## Planned Azure Architecture
+## What has been built
 
-The project will likely include most or all of the following Azure components:
+At this stage, the project includes the following major components:
 
-- **Azure Storage Account** to host the static website.
-- **Azure CDN or Front Door** to improve delivery speed and user access.
-- **Custom domain and HTTPS** for a polished public-facing site.
-- **Azure Functions** for backend logic, such as a visitor counter API.
-- **Azure Cosmos DB or Table Storage** to store visitor count data.
-- **Azure DNS** for domain management.
-- **GitHub Actions** for CI/CD so updates can be deployed automatically.
-- **Infrastructure as Code** using Terraform or Bicep to define Azure resources.
-- **Monitoring and logging** using Azure Monitor, Application Insights, or Log Analytics where appropriate.
+- A live public resume website hosted in Azure.
+- Custom domain and HTTPS for a production-style public presence.
+- A frontend designed to present experience, certifications, projects, and technical focus areas.
+- Azure Functions used for backend API logic.
+- Azure Monitor / Application Insights / Log Analytics integration to support observability work.
+- GitHub Actions workflows for frontend and backend deployment automation.
+- Ongoing security hardening of the public-facing and backend portions of the project.
 
-## Core Features
+## Architecture overview
 
-The finished project should include these core outcomes:
+![Architecture diagram](./architecture-diagram.svg)
 
-1. A live resume website accessible from a custom domain.
-2. Clean frontend content that presents experience, skills, and certifications.
-3. A backend visitor counter that updates dynamically.
-4. Automated deployment from GitHub to Azure.
-5. Reproducible infrastructure managed as code.
-6. Documentation that explains architecture, setup, and lessons learned.
+```mermaid
+flowchart LR
+    U[User Browser]
+    D[www.hunteraiton.dev<br/>Custom Domain + HTTPS]
+    F[Azure Static Web App]
+    A[Azure Function App]
+    AI[Application Insights]
+    LA[Log Analytics]
+    GH[GitHub Actions]
+    R[GitHub Repository]
 
-## Learning Objectives
+    U --> D --> F
+    F --> A
+    A --> AI
+    AI --> LA
+    R --> GH --> F
+    R --> GH --> A
+```
 
-This project is being used to go deeper in Azure by practicing:
+The project is built around a simple but realistic cloud pattern:
 
-- Static web hosting
-- Serverless computing
-- Cloud networking basics
-- DNS and domain configuration
-- Secure deployment workflows
-- CI/CD pipelines
-- Infrastructure as Code
-- Monitoring and troubleshooting
-- Cloud project documentation
+- **Frontend:** Static resume site hosted in Azure.
+- **Backend API:** Azure Function App used for dynamic functionality.
+- **Telemetry layer:** Azure Monitor, Application Insights, and Log Analytics used to analyze backend behavior and support an observability dashboard.
+- **CI/CD:** GitHub Actions deploy changes from source control into Azure.
+- **Domain / public access:** Public-facing site delivered over HTTPS with a custom domain.
 
-## Why This Project Matters
+This architecture was intentionally chosen because it reflects common real-world patterns: static delivery for low-cost public content, serverless functions for lightweight backend logic, and cloud-native telemetry for operations and troubleshooting.
 
-A certification can show knowledge, but a working cloud project shows execution. This project bridges that gap by turning Azure concepts into something visible, testable, and useful in a job search.
+## What this project demonstrates
 
-For example, instead of saying “I know Azure Functions,” this project can show a deployed function that supports a live website. That makes the learning concrete and easier to explain to recruiters, hiring managers, and other engineers.
+### 1. End-to-end ownership
 
-## Project Phases
+This is not just a frontend project. It includes cloud hosting, deployment workflows, backend API logic, telemetry integration, and production-style troubleshooting. That matters because employers are usually looking for people who can work across layers, not just write code in isolation.
 
-### Phase 1: Foundation
+### 2. Azure service integration
 
-- Create the resume content.
-- Set up the GitHub repository.
-- Host the static site in Azure.
-- Verify the site is publicly reachable.
+The project brings together multiple Azure services rather than treating Azure as a mere hosting service for static files. It uses Azure as an application platform, not just storage.
 
-### Phase 2: Backend Integration
+### 3. CI/CD in practice
 
-- Build a visitor counter API.
-- Store count data in an Azure data service.
-- Connect the frontend to the backend.
-- Test end-to-end functionality.
+The repository includes GitHub Actions workflows to automate deployments. That means changes are pushed through repeatable deployment steps rather than handled manually. For employers, that signals familiarity with DevOps workflows, release discipline, and operational repeatability.
 
-### Phase 3: Automation
+### 4. Troubleshooting and iteration
 
-- Add GitHub Actions for deployment.
-- Automate frontend and backend updates.
-- Reduce manual configuration steps.
+A big part of this project has been debugging real problems: deployment issues, function configuration changes, telemetry query adjustments, and frontend/backend integration problems. That is valuable because real cloud work usually involves diagnosing and improving systems, not just launching them once.
 
-### Phase 4: Infrastructure as Code
+### 5. Security-minded design decisions
 
-- Define Azure resources with Terraform or Bicep.
-- Rebuild the environment from code.
-- Version infrastructure changes through GitHub.
+One of the most important improvements in this project was recognizing that a frontend call with an exposed function key would be a weak design. The backend approach was revised toward a safer model: use managed identity on the backend, avoid exposing secrets client-side, and return only low-risk aggregate telemetry values instead of raw log data.
 
-### Phase 5: Security and Operations
+That change matters because it shows a security mindset: not just making something functional, but asking whether it should be deployed that way at all.
 
-- Enable HTTPS and secure DNS setup.
-- Review access controls and secrets handling.
-- Add monitoring, logs, and basic alerting.
-- Improve reliability and maintainability.
+## Project story
 
-## Success Criteria
+The project started as a standard Azure-based Cloud Resume Challenge build: publish a resume site, connect it to cloud services, and automate deployment. From there, it evolved into something more useful for a cloud security portfolio.
 
-This project will be successful when it:
+Instead of stopping at a static site and a basic visitor counter, the project expanded into observability and secure backend design. A lightweight telemetry feature was added to surface operational data, including total views, success rate, and average latency. During that work, the design had to be corrected to avoid exposing sensitive access patterns in browser-visible code.
 
-- Is live and publicly accessible.
-- Uses Azure services intentionally, not just minimally.
-- Has automated deployment workflows.
-- Can be explained clearly in interviews and on a resume.
-- Demonstrates both technical skill and project ownership.
+That led to a more security-aware architecture:
 
-## Long-Term Value
+- The frontend calls a clean API route.
+- The backend is responsible for Azure Monitor queries.
+- Secrets are not embedded in public client code.
+- The response is intentionally limited to harmless aggregate values.
+- Troubleshooting now focuses on secure Azure access, telemetry schema, and least-privilege design.
 
-Beyond completing the Cloud Resume Challenge, this project can become a base for future improvements such as:
+For an employer, that story is more valuable than a perfect first draft. It shows judgment, iteration, and the ability to improve a design after identifying risk.
 
-- Better frontend design and responsiveness.
-- Stronger security controls.
-- Additional Azure services.
-- More detailed monitoring and analytics.
-- Expansion into a broader cloud portfolio.
+## Work completed so far
 
-## Repository Purpose
+The following milestones have already been worked through in this repository:
 
-This repository documents the build process, configuration, architecture decisions, and lessons learned while creating a cloud-hosted resume on Azure. It is both a learning project and a professional portfolio artifact.
+- Resume site built and published in Azure.
+- Repository structured for frontend, backend, API, and infrastructure-related work.
+- GitHub Actions workflows created for deployment automation.
+- Custom domain and public HTTPS delivery configured.
+- Azure Function App deployment pipeline created and iterated on.
+- Observability feature added to the site concept and integrated into the frontend.
+- Backend telemetry function revised to avoid exposing function keys in browser code.
+- Application Insights / Log Analytics query behavior investigated to support aggregate telemetry.
+- Multiple deployment and query issues were debugged through real workflow runs and environment changes.
+
+## Security decisions made
+
+This project is also being used to build stronger cloud security habits. Key security decisions and improvements include:
+
+- Avoiding client-side exposure of Azure Function keys.
+- Moving toward managed identity for backend access to Azure Monitor.
+- Limiting public API output to aggregate, non-sensitive statistics.
+- Treating telemetry access as a server-side responsibility.
+- Reviewing GitHub security settings such as CodeQL, Dependabot, and secret scanning.
+- Planning additional hardening such as security headers, tighter RBAC, and stronger CI/CD identity controls.
+
+## Lessons learned
+
+A few lessons have already come out of the build process:
+
+- A deployment completing successfully does not guarantee the feature is truly working end to end.
+- Azure monitoring data models and table names can vary based on resource configuration, so telemetry queries must be validated against the actual environment.
+- Good cloud projects are not just about service selection. They are also about identity, access, observability, and secure defaults.
+- Troubleshooting is part of the signal. Employers often care just as much about how issues were diagnosed and corrected as they do about the final architecture.
+
+## Why this matters for cloud security roles
+
+This project is especially important as a cloud security portfolio item because it goes beyond “I deployed something in Azure.” It shows the ability to think about trust boundaries, public attack surface, secrets handling, telemetry exposure, managed identity, and secure deployment practices.
+
+That is the kind of thinking expected in cloud security work: understanding how a system functions, where risk appears, and how to improve the design without breaking the business goal.
+
+## Repository purpose
+
+This repository serves two purposes:
+
+1. It is a working Azure project used to build and refine practical cloud skills.
+2. It is a public portfolio artifact that shows how cloud engineering and cloud security thinking can be applied in a real build.
+
+The long-term goal is for this repository to be easy for recruiters, hiring managers, and technical interviewers to understand quickly: what was built, why it was built this way, what problems were solved, and what security decisions were made along the way.

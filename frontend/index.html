@@ -595,23 +595,44 @@
         // Telemetry Update Logic
         async function fetchObservability() {
             try {
-                // [Inference] This will be populated by your azure-api.js logic
-                // For now, we use placeholders until backend objects are connected
-                const data = {
-                    totalViews: "1,428",
-                    apiStatus: "99.98%",
-                    latency: "34ms",
-                    topRegion: "US-East"
-                };
+                                const response = await fetch('https://resume-telemetry-fn-dwhdbhc7egceawaf.eastus-01.azurewebsites.net/api/GetResumeTelemetry', {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
 
-                document.getElementById('obs-totalViews').textContent = data.totalViews;
-                document.getElementById('count').textContent = data.totalViews;
-                document.getElementById('obs-apiStatus').textContent = data.apiStatus;
-                document.getElementById('obs-latency').textContent = data.latency;
-                document.getElementById('obs-region').textContent = data.topRegion;
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+
+                const data = await response.json();
+
+                const totalViews = Number(data.totalViews ?? 0).toLocaleString();
+                const apiHealth = data.apiHealth ?? 'Unknown';
+                const avgLatency = Math.round(Number(data.avgLatencyMs ?? 0)) + 'ms';
+                const successRate = Number(data.successRate ?? 0).toFixed(1) + '%';
+
+                const tvEl = document.getElementById('obs-totalViews');
+                const ahEl = document.getElementById('obs-apiStatus');
+                const latEl = document.getElementById('obs-latency');
+                const rgEl = document.getElementById('obs-region');
+                const cntEl = document.getElementById('count');
+
+                if (tvEl) tvEl.textContent = totalViews;
+                if (ahEl) ahEl.textContent = successRate;
+                if (latEl) latEl.textContent = avgLatency;
+                if (rgEl) rgEl.textContent = 'N/A';
+                if (cntEl) cntEl.textContent = totalViews;
 
             } catch (err) {
-                console.warn("Telemetry fetch failed.", err);
+                console.warn('Telemetry fetch failed.', err);
+                const tvEl = document.getElementById('obs-totalViews');
+                const ahEl = document.getElementById('obs-apiStatus');
+                const latEl = document.getElementById('obs-latency');
+                const rgEl = document.getElementById('obs-region');
+                if (tvEl) tvEl.textContent = '0';
+                if (ahEl) ahEl.textContent = '0.0%';
+                if (latEl) latEl.textContent = '0ms';
+                if (rgEl) rgEl.textContent = 'N/A';
             }
         }
 
